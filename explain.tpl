@@ -10,9 +10,11 @@
 				<? endforeach; ?>
 			</tr>
 			<? foreach ($rows as $row): ?>
+			<tr>
 				<? foreach ($row as $key => $value): ?>
 				<td><?= $value ?></td>
 				<? endforeach; ?>
+			</tr>
 			<? endforeach; ?>
 		</table>
 	</table>
