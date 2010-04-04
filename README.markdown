@@ -8,6 +8,10 @@ This tool does not add anything to the `mk-query-digest` utility itself. It simp
 
 Simply create a `conf.php` file using the sample as a guide and copy the files into a folder served by a some webserver that knows what to do with .php files. The code was written to be as portable as possible, so it uses the old-school `mysql_` set of functions and no advanced language features.
 
+## Screenshot
+
+<a href="http://github.com/mihasya/mk-query-digest-ui/raw/master/screenshot.png"><img style="width: 400px" src="http://github.com/mihasya/mk-query-digest-ui/raw/master/screenshot.png" /></a>
+
 ## Authors
 * Mikhail Panchenko
 * Tim Denike
