@@ -28,9 +28,10 @@ body {
 	border: 1px solid #C0C0C0;
 	border-width: 1px 0 0 0;
 }
+table {
+	width: 100%;
+}
 td {
-	font-family: Monaco, Monospace, "Courier New";
-	font-size: 12px;
 }
 tr.alt {
 	background-color: #F0F0F0;
@@ -46,6 +47,8 @@ th a:visited {
 	color: #0000FF;
 }
 .query {
+	font-family: Monaco, Monospace, "Courier New";
+	font-size: 12px;
 }
 .query .comment {
 	color: #c0c0c0;
