@@ -10,7 +10,7 @@
 	}
 
 	function format_query($query) {
-		$pattern = "/(?i)\b((\/\*.*?\*\/)|SELECT|FROM|WHERE|(INNER|OUTER|STRAIGHT|RIGHT|LEFT(?:\s?))?JOIN|AND|OR|ORDER BY|GROUP BY|DESC|FORCE INDEX|USE INDEX|BETWEEN|IN)\b/";
+		$pattern = "/(?i)((\/\*.*?\*\/)|SELECT|FROM|WHERE|(INNER|OUTER|STRAIGHT|RIGHT|LEFT(?:\s?))?JOIN|ORDER BY|GROUP BY|DESC|FORCE INDEX|USE INDEX|BETWEEN|AND|IN|OR)/";
 		$query = preg_replace_callback($pattern, '_format_query_callback', $query);
 		return "<span class=\"query\">{$query}</span>";
 	}
