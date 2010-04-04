@@ -1,7 +1,7 @@
 <?php include("top.tpl"); ?>
 	<table>
 		<p>
-			<span class="query"><?= format_query($query) ?>
+			<?= format_query($query) ?>
 		</p>
 		<table>
 			<tr>

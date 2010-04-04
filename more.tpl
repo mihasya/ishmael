@@ -9,7 +9,7 @@
 			<tr>
 				<td><?= $row['ts_max']?></td>
 				<td><?= $row['query_time_sum']?></td>
-				<td><span class="query"><?= format_query($row['sample']) ?></span></td>
+				<td><?= format_query($row['sample']) ?></td>
 			</tr>
 			<? endforeach?>
 		</table>

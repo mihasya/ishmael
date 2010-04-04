@@ -14,7 +14,7 @@
 				<td><? printf("%.2f", $row['time_pct']) ?></td>
 				<td><? printf("%.2f", $row['qty_pct']) ?></td>
 				<td><? printf("%.2f", $row['ratio']) ?></td>
-				<td><span class="query"><?=format_query($row['sample']) ?></span></td>
+				<td><?=format_query($row['sample']) ?></td>
 				<td><a href="explain.php?checksum=<?=$row['checksum']?>">explain</a></td>
 				<td><a href="more.php?checksum=<?=$row['checksum']?>">more</a></td>
 			</tr>
