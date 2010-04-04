@@ -1,0 +1,11 @@
+<?php
+    # I'm guessing that eventually more elaborate configuration will be needed
+    # since the mk-digest db might live on an entirely different host. That's
+    # not the case for us right now, so we'll make that case work later
+    # - Mike 2010-04-04
+
+	$conf['db_host'] = ''; # host on which the dbs live
+	$conf['db_user'] = ''; # user with which to login
+	$conf['db_password'] = ''; # password
+	$conf['db_database_mk'] = ''; # database in which the mk-query-digest tables live
+	$conf['db_database_live'] = ''; # database in which the actual data lives, for EXPLAIN purposes
