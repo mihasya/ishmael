@@ -10,7 +10,7 @@
 				<? endforeach; ?>
 			</tr>
 			<? foreach ($rows as $row): ?>
-			<tr>
+			<tr <? if ($counter++ % 2): ?>class="alt"<? endif ?>>
 				<? foreach ($row as $key => $value): ?>
 				<td><?= $value ?></td>
 				<? endforeach; ?>
