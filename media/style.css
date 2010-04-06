@@ -33,6 +33,9 @@ body {
 	border: 1px solid #C0C0C0;
 	border-width: 1px 0 0 0;
 }
+small {
+	color: #C0C0C0;
+}
 table {
 	width: 100%;
 }

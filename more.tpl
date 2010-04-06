@@ -1,5 +1,8 @@
 <?php include("top.tpl"); ?>
-		<h3>last report</h3>
+		<h3>Last Report</h3>
+		<p>
+			<?= format_query($rows[0]['sample']) ?>
+		</p>
 		<table>
 			<tr>
 				<th>&nbsp;</th>
@@ -7,6 +10,9 @@
 				<th><?= $point ?></th>
 				<? endforeach; ?>
 			<tr>
+			<tr>
+				<td>Query count</td><td><?= $rows[0]['ts_cnt']?></td>
+			</tr>
 			<? foreach($fields as $field): ?>
 			<tr>
 				<td><?= $field ?></td>
@@ -16,6 +22,8 @@
 			</tr>
 			<? endforeach; ?>
 		</table>
+		<h3>Previous Reports</h3>
+		<small>there will be a graph here eventually...</small>
 		<table>
 			<tr>
 				<th>Timestamp</th>
