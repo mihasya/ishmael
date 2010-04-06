@@ -1,5 +1,4 @@
 <?php include("top.tpl"); ?>
-	<table>
 		<p>
 			<?= format_query($query) ?>
 		</p>
@@ -17,5 +16,4 @@
 			</tr>
 			<? endforeach; ?>
 		</table>
-	</table>
 <?php include("bottom.tpl"); ?>
