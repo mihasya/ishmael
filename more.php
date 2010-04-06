@@ -7,10 +7,19 @@
 
 	$checksum = $_GET['checksum'];
 
+	$fields = array(
+		'Query_time',
+		'Lock_time',
+		'Rows_sent',
+		'Rows_examined',
+	);
+
+	$points = array(
+		'sum', 'min', 'max', 'pct_95', 'stddev', 'median',
+	);
+
 	$q = "SELECT 
-			ts_max,
-			query_time_sum,
-			sample
+			*
 		FROM
 			{$conf['db_query_review_history_table']}
 		WHERE
