@@ -9,5 +9,8 @@
 	</head>
 
 	<body>
-		<h1 id="title_bar">mk-query-digest UI</h1>
+		<div id="title_bar">
+			<h1>ishmael</h1>
+			a UI for mk-query-digest
+		</div>
 		<div id="content_wrapper">
