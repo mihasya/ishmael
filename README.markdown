@@ -12,7 +12,7 @@ Simply create a `conf.php` file using the sample as a guide and copy the files i
 
 ## Screenshot
 
-<a href="http://github.com/mihasya/mk-query-digest-ui/raw/master/screenshot.png"><img width="600" style="width: 600px" src="http://github.com/mihasya/mk-query-digest-ui/raw/master/screenshot.png" /></a>
+<a href="http://github.com/mihasya/ishmael/raw/master/screenshot.png"><img width="600" style="width: 600px" src="http://github.com/mihasya/ishmael/raw/master/screenshot.png" /></a>
 
 ## Authors
 * Mikhail Panchenko
