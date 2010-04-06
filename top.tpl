@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 	<head>
-		<title>mk-query-digest UI</title>
+		<title>ishmael - a UI for mk-query-digest</title>
 		<link rel="stylesheet" href="media/style.css" type="text/css"/>
 	</head>
 
