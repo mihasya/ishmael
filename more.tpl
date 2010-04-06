@@ -6,7 +6,7 @@
 				<th>Query</th>
 			</tr>
 			<? foreach ($rows as $row): ?>
-			<tr>
+			<tr <? if ($counter++ % 2): ?>class="alt"<? endif ?>>
 				<td><?= $row['ts_max']?></td>
 				<td><?= $row['query_time_sum']?></td>
 				<td><?= format_query($row['sample']) ?></td>
