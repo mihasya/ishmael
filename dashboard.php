@@ -13,7 +13,7 @@
 	$q = "SELECT
 			SUM(query_time_sum) 
 		FROM 
-			query_review_history 
+			{$conf['db_query_review_history_table']}
 		WHERE 
 			ts_max > date_sub(now(),interval {$hours} hour);";
 	$result = mysql_query($q);
@@ -23,7 +23,7 @@
 	$q = "SELECT
 			SUM(ts_cnt) 
 		FROM 
-			query_review_history 
+			{$conf['db_query_review_history_table']}
 		WHERE 
 			ts_max > date_sub(now(),interval $hours hour);";
 	$result = mysql_query($q);
@@ -40,7 +40,7 @@
 			(SUM(query_time_sum)/{$query_time_sum}*100) AS time_pct,
 			((SUM(query_time_sum)/{$query_time_sum}*100)/(SUM(ts_cnt)/{$query_qty_sum}*100)) AS ratio
 		FROM 
-			query_review_history 
+			{$conf['db_query_review_history_table']}
 		WHERE 
 			ts_max > date_sub(now(),interval $hours hour) 
 		GROUP BY checksum ORDER BY $sort DESC LIMIT 20";

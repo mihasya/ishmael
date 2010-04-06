@@ -7,7 +7,7 @@
 
 	$checksum = $_GET['checksum'];
 
-	$q = "SELECT * FROM query_review_history WHERE checksum = '{$checksum}'";
+	$q = "SELECT * FROM {$conf['db_query_review_history_table']} WHERE checksum = '{$checksum}'";
 	$result = mysql_query($q);
 	$row = mysql_fetch_assoc($result);
 	$query = $row['sample'];

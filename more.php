@@ -12,7 +12,7 @@
 			query_time_sum,
 			sample
 		FROM
-			query_review_history
+			{$conf['db_query_review_history_table']}
 		WHERE
 			checksum={$checksum}
 		ORDER BY ts_max DESC";

@@ -9,3 +9,6 @@
 	$conf['db_password'] = ''; # password
 	$conf['db_database_mk'] = ''; # database in which the mk-query-digest tables live
 	$conf['db_database_live'] = ''; # database in which the actual data lives, for EXPLAIN purposes
+	# mk-query-digest lets you customize table names
+	$conf['db_query_review_table'] = '';
+	$conf['db_query_review_history_table'] = '';
