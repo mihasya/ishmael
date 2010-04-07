@@ -9,13 +9,13 @@
 				<? foreach($points as $point): ?>
 				<th><?= $point ?></th>
 				<? endforeach; ?>
+			</tr>
 			<tr>
-			<tr>
-				<td>Query count</td><td><?= $rows[0]['ts_cnt']?></td>
+				<th class="horiz">Query count</th><td><?= $rows[0]['ts_cnt']?></td>
 			</tr>
 			<? foreach($fields as $field): ?>
 			<tr>
-				<td><?= $field ?></td>
+				<th class="horiz"><?= $field ?></th>
 				<? foreach($points as $point): $col = "{$field}_{$point}"; ?>
 				<td><?= $rows[0][$col]?></td>
 				<? endforeach; ?>

@@ -47,6 +47,11 @@ tr.alt {
 th {
 	border-bottom: 2px solid #444444;
 	background-color: #F0F0F0;
+	text-align: left;
+}
+th.horiz {
+	border: 0;
+	width: 10%;
 }
 th a {
 	text-decoration: none;
