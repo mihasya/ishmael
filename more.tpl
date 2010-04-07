@@ -10,11 +10,12 @@
 				<th><?= $point ?></th>
 				<? endforeach; ?>
 			</tr>
+			<? $data_counter = 1; ?>
 			<tr>
 				<th class="horiz">Query count</th><td><?= $rows[0]['ts_cnt']?></td>
 			</tr>
 			<? foreach($fields as $field): ?>
-			<tr>
+			<tr <? if ($data_counter++ % 2): ?>class="alt"<? endif ?>>
 				<th class="horiz"><?= $field ?></th>
 				<? foreach($points as $point): $col = "{$field}_{$point}"; ?>
 				<td><?= $rows[0][$col]?></td>
