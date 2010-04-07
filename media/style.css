@@ -54,6 +54,9 @@ th a {
 th a:visited {
 	color: #0000FF;
 }
+canvas {
+	margin: 0 auto 0 auto;
+}
 .query {
 	font-family: Monaco, Monospace, "Courier New";
 	font-size: 12px;
@@ -65,4 +68,7 @@ th a:visited {
 	font-weight: bold;
 	color: #444444;
 	text-transform: uppercase;
+}
+.graph_container {
+	text-align: center;
 }

@@ -23,7 +23,29 @@
 			<? endforeach; ?>
 		</table>
 		<h3>Previous Reports</h3>
-		<small>there will be a graph here eventually...</small>
+		<div class="graph_container">
+			<canvas id="stats"></canvas>
+		</div>
+		<script type="text/javascript">
+		var graph = new YAHOO.Smb.Graph('stats', {
+			start: 0,
+			width: 700,
+			height: 200,
+			end: <?= count($rows)?>,
+			type: 'bar',
+			hideYAxis: true,
+			hideXAxis: true,
+			enableHoverInfo: true
+		});
+		var data = [
+		<? foreach ($rows as $row): ?>
+			{ date: '<?= $row['ts_max']?>', query_time: <?=$row['Query_time_sum']?> },
+		<? endforeach; ?>
+		];
+		graph.addDataSet(data, { y: 'query_time', xLabel: 'date', yLabel: 'query_time', color: '#444444' });
+		graph.render();
+		</script>
+
 		<table>
 			<tr>
 				<th>Timestamp</th>
