@@ -6,7 +6,7 @@
 	<head>
 		<title>ishmael - a UI for mk-query-digest</title>
 		<link rel="stylesheet" href="media/style.css" type="text/css"/>
-		<script src="media/yahoo-dom-event.js"></script>
+		<script src="media/graph.js"></script>
 	</head>
 
 	<body>
