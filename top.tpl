@@ -13,5 +13,18 @@
 		<div id="title_bar">
 			<h1>ishmael</h1>
 			a UI for mk-query-digest
+			<form action="" method="GET">
+				<select name="host">
+					<? foreach ($hosts as $h):?>
+					<option value="<?=$h?>" <? if ($host == $h):?>SELECTED<? endif; ?>><?= $h ?></option>
+					<? endforeach; ?>
+				</select>
+				<? foreach ($_GET as $key => $value): ?>
+					<? if ($key!='host'):?>
+					<input type="hidden" name="<?= $key ?>" value="<?= $value ?>">
+					<? endif; ?>
+				<? endforeach; ?>
+				<input type="submit" value="go">
+			</form>
 		</div>
 		<div id="content_wrapper">

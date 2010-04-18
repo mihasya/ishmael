@@ -21,7 +21,7 @@
 	$q = "SELECT 
 			*
 		FROM
-			{$conf['db_query_review_history_table']}
+			{$host_conf['db_query_review_history_table']}
 		WHERE
 			checksum={$checksum}
 		ORDER BY ts_max DESC";

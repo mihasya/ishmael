@@ -7,13 +7,13 @@
 
 	$checksum = $_GET['checksum'];
 
-	$q = "SELECT * FROM {$conf['db_query_review_history_table']} WHERE checksum = '{$checksum}'";
+	$q = "SELECT * FROM {$host_conf['db_query_review_history_table']} WHERE checksum = '{$checksum}'";
 	$result = mysql_query($q);
 	$row = mysql_fetch_assoc($result);
 	$query = $row['sample'];
 	$explain = "EXPLAIN {$query}";
 	
-	@mysql_select_db($conf['db_database_live']) or die("Unable to select database");
+	@mysql_select_db($host_conf['db_database_live']) or die("Unable to select database");
 	$result = mysql_query($explain);
 	$rows = array();
 

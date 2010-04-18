@@ -4,11 +4,20 @@
 	# not the case for us right now, so we'll make that case work later
 	# - Mike 2010-04-04
 
-	$conf['db_host'] = ''; # host on which the dbs live
+	# these are default values; they can be overridden on a per-host basis
 	$conf['db_user'] = ''; # user with which to login
 	$conf['db_password'] = ''; # password
 	$conf['db_database_mk'] = ''; # database in which the mk-query-digest tables live
 	$conf['db_database_live'] = ''; # database in which the actual data lives, for EXPLAIN purposes
 	# mk-query-digest lets you customize table names
-	$conf['db_query_review_table'] = '';
-	$conf['db_query_review_history_table'] = '';
+	$conf['db_query_review_table'] = 'query_review';
+	$conf['db_query_review_history_table'] = 'query_review_history';
+
+	$conf['hosts'] = array(
+		'sample.host' => array(
+			# leave empty to use defaults if your cluster is homogeneous
+			# otherwise use the same keys as the defaults to override
+			# 'db_user' => 'foo',
+			# 'db_password' => 'blah',
+		)
+	)

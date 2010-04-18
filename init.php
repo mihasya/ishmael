@@ -18,6 +18,38 @@
 		return "<span class=\"query\">{$query}</span>";
 	}
 
+	# get the list of hosts this ishmael install is configured to look at
+	function ish_get_host_list() {
+		global $conf;
+		return array_keys($conf['hosts']);
+	}
 
-	mysql_connect($conf['db_host'],$conf['db_user'],$conf['db_password']);
-	@mysql_select_db($conf['db_database_mk']) or die("Unable to select database");
+	# merges the config for a particular host on top of the defaults
+	function ish_get_host_config($host) {
+		global $conf;
+		$defaults = $conf;
+		unset($defaults['hosts']);
+		$host_config = array_merge($defaults, $conf['hosts'][$host]);
+		$host_config['db_host'] = $host;
+		return $host_config;
+	}
+
+	# build up a query string using 1. things we need in every URL and 
+	# 2. whatever is passed in $args as k-v pairs
+	function ish_build_query($args) {
+		global $host;
+		$always_need = array(
+			'host' => $host,
+		);
+		$final_args = array_merge($always_need, $args);
+		return http_build_query($final_args);
+	}
+
+	$hosts = ish_get_host_list();
+
+	$host = $_GET['host'] ? $_GET['host'] : $hosts[0];
+
+	$host_conf = ish_get_host_config($host);
+
+	mysql_connect($host_conf['db_host'],$host_conf['db_user'],$host_conf['db_password']);
+	@mysql_select_db($host_conf['db_database_mk']) or die("Unable to select database");

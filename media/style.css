@@ -20,6 +20,11 @@ body {
 	padding: 0;
 	display: inline;
 }
+#title_bar form {
+    display: inline;
+    float: right;
+    margin-top: 5px;
+}
 #footer {
 	margin: 10px 0;
 	text-align: center;

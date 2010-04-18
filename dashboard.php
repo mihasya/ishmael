@@ -13,7 +13,7 @@
 	$q = "SELECT
 			SUM(query_time_sum) 
 		FROM 
-			{$conf['db_query_review_history_table']}
+			{$host_conf['db_query_review_history_table']}
 		WHERE 
 			ts_max > date_sub(now(),interval {$hours} hour);";
 	$result = mysql_query($q);
@@ -23,7 +23,7 @@
 	$q = "SELECT
 			SUM(ts_cnt) 
 		FROM 
-			{$conf['db_query_review_history_table']}
+			{$host_conf['db_query_review_history_table']}
 		WHERE 
 			ts_max > date_sub(now(),interval $hours hour);";
 	$result = mysql_query($q);
@@ -40,7 +40,7 @@
 			(SUM(query_time_sum)/{$query_time_sum}*100) AS time_pct,
 			((SUM(query_time_sum)/{$query_time_sum}*100)/(SUM(ts_cnt)/{$query_qty_sum}*100)) AS ratio
 		FROM 
-			{$conf['db_query_review_history_table']}
+			{$host_conf['db_query_review_history_table']}
 		WHERE 
 			ts_max > date_sub(now(),interval $hours hour) 
 		GROUP BY checksum ORDER BY $sort DESC LIMIT 20";
@@ -50,8 +50,15 @@
 	print_r($err);
 	$rows = array();
 	while ($row = mysql_fetch_assoc($result)) {
+		$row['explain_url'] = "explain.php?" . ish_build_query(array('checksum'=>$row['checksum']));
+		$row['more_url'] = "more.php?" . ish_build_query(array('checksum'=>$row['checksum']));
 		$rows[] = $row;
 	}
+
+	# links for sorting
+	$sort_time_url = '?' . ish_build_query(array('sort'=>'time'));
+	$sort_count_url = '?' . ish_build_query(array('sort'=>'count'));
+	$sort_ratio_url = '?' . ish_build_query(array('sort'=>'ratio'));
 
 	#
 	# spaghetti template separation
