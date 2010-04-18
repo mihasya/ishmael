@@ -25,6 +25,11 @@ body {
 	float: right;
 	margin-top: 5px;
 }
+#hours {
+	width: 30px;
+	border: 1px solid #f0f0f0;
+	text-align: center;
+}
 #footer {
 	margin: 10px 0;
 	text-align: center;

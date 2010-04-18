@@ -23,7 +23,8 @@
 		FROM
 			{$host_conf['db_query_review_history_table']}
 		WHERE
-			checksum={$checksum}
+			checksum={$checksum} AND
+			ts_max > date_sub(now(),interval $hours hour) 
 		ORDER BY ts_max DESC";
 	$result=mysql_query($q);
 

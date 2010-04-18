@@ -38,8 +38,10 @@
 	# 2. whatever is passed in $args as k-v pairs
 	function ish_build_query($args) {
 		global $host;
+		global $hours;
 		$always_need = array(
 			'host' => $host,
+			'hours' => $hours,
 		);
 		$final_args = array_merge($always_need, $args);
 		return http_build_query($final_args);
@@ -47,9 +49,12 @@
 
 	$hosts = ish_get_host_list();
 
+	# which host are we looking at
 	$host = $_GET['host'] ? $_GET['host'] : $hosts[0];
-
 	$host_conf = ish_get_host_config($host);
+
+	# what timeframe we want to look at
+	$hours = $_GET['hours'] ? $_GET['hours'] : 24;
 
 	mysql_connect($host_conf['db_host'],$host_conf['db_user'],$host_conf['db_password']);
 	@mysql_select_db($host_conf['db_database_mk']) or die("Unable to select database");

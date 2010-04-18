@@ -5,8 +5,6 @@
 
 	require_once('init.php');
 
-	# hours
-	$hours = ($_GET['hours']) ? $_GET['hours'] : 24;
 	$sort = ($_GET['sort']) ? $_GET['sort'] : "ratio";
 
 	# Get total amount of query time (for % later)

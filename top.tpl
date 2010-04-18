@@ -14,13 +14,15 @@
 			<h1>ishmael</h1>
 			a UI for mk-query-digest
 			<form action="" method="GET">
-				<select name="host">
+				last <input type="text" name="hours" id="hours" value="<?= $hours ?>" />
+				<label for="hours">hours</label>
+				on <select name="host">
 					<? foreach ($hosts as $h):?>
 					<option value="<?=$h?>" <? if ($host == $h):?>SELECTED<? endif; ?>><?= $h ?></option>
 					<? endforeach; ?>
 				</select>
 				<? foreach ($_GET as $key => $value): ?>
-					<? if ($key!='host'):?>
+					<? if (!in_array($key, array('host', 'hours'))): ?>
 					<input type="hidden" name="<?= $key ?>" value="<?= $value ?>">
 					<? endif; ?>
 				<? endforeach; ?>
