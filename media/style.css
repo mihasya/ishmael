@@ -53,15 +53,24 @@ th {
 	border-bottom: 2px solid #444444;
 	background-color: #F0F0F0;
 	text-align: left;
+	color: #444444;
+	padding: 0 5px;
+	white-space: nowrap;
 }
+th.sorted {
+	background-color: #444444;
+	color: #f0f0f0;
+}
+th.sorted a {
+	color: #f0f0f0;
+}
+
 th.horiz {
 	border: 0;
 	width: 10%;
 }
 th a {
 	text-decoration: none;
-}
-th a:visited {
 	color: #0000FF;
 }
 canvas {

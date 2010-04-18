@@ -2,9 +2,9 @@
 		<table>
 			<tr>
 				<th>Rank</th>
-				<th><a href="<?= $sort_time_url ?>">% of time</a></th>
-				<th><a href="<?= $sort_count_url ?>">% of queries</a></th>
-				<th><a href="<?= $sort_ratio_url ?>">Ratio</a></th>
+				<th <? if ($sort=='time'):?>class="sorted"<? endif ?>><a href="<?= $sort_time_url ?>">% time</a></th>
+				<th <? if ($sort=='count'):?>class="sorted"<? endif ?>><a href="<?= $sort_count_url ?>">% queries</a></th>
+				<th <? if ($sort=='ratio'):?>class="sorted"<? endif ?>><a href="<?= $sort_ratio_url ?>">Ratio</a></th>
 				<th>sample query</th>
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
