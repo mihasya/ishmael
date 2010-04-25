@@ -17,8 +17,8 @@
 				last <input type="text" name="hours" id="hours" value="<?= $hours ?>" />
 				<label for="hours">hours</label>
 				on <select name="host">
-					<? foreach ($hosts as $h):?>
-					<option value="<?=$h?>" <? if ($host == $h):?>SELECTED<? endif; ?>><?= $h ?></option>
+					<? foreach ($hosts as $h => $t):?>
+					<option value="<?=$h?>" <? if ($host == $h):?>SELECTED<? endif; ?>><?= $t ?></option>
 					<? endforeach; ?>
 				</select>
 				<? foreach ($_GET as $key => $value): ?>

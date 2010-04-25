@@ -1,5 +1,5 @@
 <?php include("top.tpl"); ?>
-		<h2>Dashboard for <?= $host ?></h2>
+		<h2>Dashboard for <?= $host_conf['title'] ?></h2>
 		<h3>Average Slow Query Time</h3>
 		<div class="graph_container">
 			<canvas id="dashboard_graph"></canvas>

@@ -19,5 +19,7 @@
 			# otherwise use the same keys as the defaults to override
 			# 'db_user' => 'foo',
 			# 'db_password' => 'blah',
+			# values available only at the host level:
+			# 'label' => 'shard1a' # used for easier host identification
 		)
 	)

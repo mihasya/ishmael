@@ -21,7 +21,12 @@
 	# get the list of hosts this ishmael install is configured to look at
 	function ish_get_host_list() {
 		global $conf;
-		return array_keys($conf['hosts']);
+		$host_list = array();
+		foreach (array_keys($conf['hosts']) as $host) {
+			$host_config = ish_get_host_config($host);
+			$host_list[$host] = $host_config['title'];
+		}
+		return $host_list;
 	}
 
 	# merges the config for a particular host on top of the defaults
@@ -31,6 +36,9 @@
 		unset($defaults['hosts']);
 		$host_config = array_merge($defaults, $conf['hosts'][$host]);
 		$host_config['db_host'] = $host;
+		$host_config['title'] = $host_config['label']
+			? "{$host_config['label']} - {$host_config['db_host']}"
+			: $host_config['db_host'];
 		return $host_config;
 	}
 
@@ -50,7 +58,7 @@
 	$hosts = ish_get_host_list();
 
 	# which host are we looking at
-	$host = $_GET['host'] ? $_GET['host'] : $hosts[0];
+	$host = $_GET['host'] ? $_GET['host'] : reset(array_keys($hosts));
 	$host_conf = ish_get_host_config($host);
 
 	# what timeframe we want to look at
