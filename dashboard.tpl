@@ -1,4 +1,29 @@
 <?php include("top.tpl"); ?>
+		<h2>Dashboard for <?= $host ?></h2>
+		<h3>Average Slow Query Time</h3>
+		<div class="graph_container">
+			<canvas id="dashboard_graph"></canvas>
+		</div>
+		 <script type="text/javascript">
+			var graph = new YAHOO.Smb.Graph('dashboard_graph', {
+				start: 0,
+				width: 700,
+				height: 200,
+				end: <?= count($historical_data) ?>,
+				type: 'bar',
+				hideYAxis: true,
+				hideXAxis: true,
+				enableHoverInfo: true
+			});
+			var data = [
+			<? foreach ($historical_data as $row): ?>
+				{ date: '<?= $row['period']?>', avg_query_time: <?=$row['avg_time']?> },
+			<? endforeach; ?>
+			];
+			graph.addDataSet(data, { y: 'avg_query_time', xLabel: 'date', yLabel: 'avg_query_time', color: '#444444' });
+			graph.render();
+		</script>
+		<h3>Slow Query Overview</h3>
 		<table>
 			<tr>
 				<th>Rank</th>

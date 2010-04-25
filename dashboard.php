@@ -7,6 +7,25 @@
 
 	$sort = ($_GET['sort']) ? $_GET['sort'] : "ratio";
 
+	# setup dashboard graph
+	$q = "SELECT
+			SUM(ts_cnt) AS total_queries,
+			(SUM(query_time_sum)/SUM(ts_cnt)) AS avg_time,
+			COUNT(*) AS distinct_queries,
+			DATE_FORMAT(ts_max,\"%m/%d/%y %H:00:00\") AS period
+		FROM
+			{$host_conf['db_query_review_history_table']}
+		WHERE
+			ts_max > DATE_SUB(NOW(), INTERVAL {$hours} HOUR)
+		GROUP BY
+			period";
+	$result = mysql_query($q);
+
+	$historical_data = array();
+	while ($row = mysql_fetch_assoc($result)) {
+		$historical_data[] = $row;
+	}
+
 	# Get total amount of query time (for % later)
 	$q = "SELECT
 			SUM(query_time_sum) 
