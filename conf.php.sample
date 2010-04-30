@@ -22,4 +22,4 @@
 			# values available only at the host level:
 			# 'label' => 'shard1a' # used for easier host identification
 		)
-	)
+	);
