@@ -35,6 +35,9 @@
 			ts_max > date_sub(now(),interval {$hours} hour);";
 	$result = mysql_query($q);
 	$query_time_sum = mysql_result($result, 0);
+	if (is_null($query_time_sum)) {
+		$query_time_sum = 0;
+	}
 
 	# Get total # of queries in history window (for % later)
 	$q = "SELECT
@@ -45,6 +48,10 @@
 			ts_max > date_sub(now(),interval $hours hour);";
 	$result = mysql_query($q);
 	$query_qty_sum = mysql_result($result, 0);
+	if (is_null($query_qty_sum)) {
+		$query_qty_sum = 0;
+	}
+
 
 	# Get list of bad queries
 	$q = "SELECT
