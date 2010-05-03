@@ -15,6 +15,13 @@
 
 		$query = preg_replace("/([\w'\)])\s*,/", "$1, ", $query);
 
+		if (strlen($query) > 2000) {
+			$all = substr($query, 300);
+			$query = substr($query, 0, 300)
+				. '<span class="query-all" style="display:none">'.$all.'</span><span class="query-dot">...</span>'
+				. ' (<a href="#" onclick="$(this).siblings().toggle(); return false;">show / hide</a>)';
+		}
+
 		return "<span class=\"query\">{$query}</span>";
 	}
 
