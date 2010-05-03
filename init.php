@@ -13,7 +13,7 @@
 		$pattern = "/(?i)(\/\*.*?\*\/)|(\b(SELECT|INSERT|UPDATE|DELETE|FROM|WHERE|(INNER|OUTER|STRAIGHT|RIGHT|LEFT(?:\s?))?JOIN|ORDER BY|GROUP BY|DESC|FORCE INDEX|USE INDEX|BETWEEN|USING|AND|IN|OR|AS|ON)\b)/";
 		$query = preg_replace_callback($pattern, '_format_query_callback', $query);
 
-		$query = preg_replace("/([\w'])\s*,/", "$1, ", $query);
+		$query = preg_replace("/([\w'\)])\s*,/", "$1, ", $query);
 
 		return "<span class=\"query\">{$query}</span>";
 	}
