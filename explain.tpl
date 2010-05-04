@@ -3,6 +3,7 @@
 		<p>
 			<?= format_query($query) ?>
 		</p>
+		<? if (count($rows)) { ?>
 		<table>
 			<tr>
 				<? foreach ($rows[0] as $key => $value): ?>
@@ -17,6 +18,8 @@
 			</tr>
 			<? endforeach; ?>
 		</table>
+		<? } ?>
+		<? if (count($tables)) { ?>
 		<h3>Tables</h3>
 		<table>
 			<tr>
@@ -30,4 +33,5 @@
 			</tr>
 			<? endforeach; ?>
 		</table>
+		<? } ?>
 <?php include("bottom.tpl"); ?>

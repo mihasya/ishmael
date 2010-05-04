@@ -11,15 +11,20 @@
 	$result = mysql_query($q);
 	$row = mysql_fetch_assoc($result);
 	$query = $row['sample'];
-	$explain = "EXPLAIN {$query}";
+	$explain = "EXPLAIN ".preg_replace('|^\s*\/\*.*\*\/|', '', $query);
 	
-	@mysql_select_db($host_conf['db_database_live']) or die("Unable to select database");
-	$result = mysql_query($explain);
+	mysql_select_db($host_conf['db_database_live']) or die("Unable to select database");
+
+	$is_select_query = (stripos($explain, 'SELECT') !== false);
+
+	if ($is_select_query) {
+		$result = mysql_query($explain);
+	}
 	$rows = array();
 
 	$tables = array();
 
-	while ($row = mysql_fetch_assoc($result)) {
+	while ($is_select_query && $row = mysql_fetch_assoc($result)) {
 		$row['possible_keys'] = implode('<br />', explode(',', $row['possible_keys']));
 		$rows[] = $row;
 		$table_alias = $row['table'];
