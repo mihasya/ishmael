@@ -41,7 +41,7 @@
 		global $conf;
 		$defaults = $conf;
 		unset($defaults['hosts']);
-		$host_config['db_host'] = $host;
+		$defaults['db_host'] = $host;
 		$host_config = array_merge($defaults, $conf['hosts'][$host]);
 		$host_config['title'] = $host_config['label']
 			? "{$host_config['label']} - {$host_config['db_host']}"
