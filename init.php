@@ -71,5 +71,5 @@
 	# what timeframe we want to look at
 	$hours = $_GET['hours'] ? $_GET['hours'] : 24;
 
-	mysql_connect($host_conf['db_host'],$host_conf['db_user'],$host_conf['db_password']);
-	@mysql_select_db($host_conf['db_database_mk']) or die("Unable to select database");
+	mysql_connect($host_conf['db_host'],$host_conf['db_user'],$host_conf['db_password']) or die(sprintf("Unable to connect to MySQL server: %s", mysql_error()));
+	mysql_select_db($host_conf['db_database_mk']) or die(sprintf("Unable to select database: %s", mysql_error()));
