@@ -6,6 +6,7 @@
 	require_once('init.php');
 
 	$checksum = $_GET['checksum'];
+	$hours = $_GET['hours'];
 
 	$q = "SELECT * FROM {$host_conf['db_query_review_history_table']} WHERE checksum = '{$checksum}'";
 	$result = mysql_query($q);
