@@ -7,12 +7,16 @@
 
 	$sort = ($_GET['sort']) ? $_GET['sort'] : "ratio";
 
+	$aggregate='%m/%d/%y %H:00:00';
+	if ($hours > 720){
+		$aggregate='%m/%d/%y 00:00:00';
+	}
 	# setup dashboard graph
 	$q = "SELECT
 			SUM(ts_cnt) AS total_queries,
 			(SUM(query_time_sum)/SUM(ts_cnt)) AS avg_time,
 			COUNT(*) AS distinct_queries,
-			DATE_FORMAT(ts_max,\"%m/%d/%y %H:00:00\") AS period
+			DATE_FORMAT(ts_max,\"{$aggregate}\") AS period
 		FROM
 			{$host_conf['db_query_review_history_table']}
 		WHERE
