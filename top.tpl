@@ -7,6 +7,8 @@
 		<title>ishmael - a UI for mk-query-digest</title>
 		<link rel="stylesheet" href="media/style.css" type="text/css"/>
 		<script src="media/graph.js"></script>
+		<script src="media/Fonts.js"></script>
+		<script src="media/BitmapType.js"></script>
 		<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 	</head>
 

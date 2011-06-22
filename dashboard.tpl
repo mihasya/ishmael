@@ -7,13 +7,31 @@
 		 <script type="text/javascript">
 			var graph = new YAHOO.Smb.Graph('dashboard_graph', {
 				start: 0,
-				width: 700,
+				width: 900,
 				height: 200,
 				end: <?= count($historical_data) ?>,
 				type: 'bar',
+				showbarlabels: true,
 				hideYAxis: true,
-				hideXAxis: true,
-				enableHoverInfo: true
+				hideXAxis: false,
+				xAxisColor: '#888',
+				xGridColor: '#eee',
+				yGridColor: '#eee',
+				yGridSpacing: 40,
+				xGridSpacing: <?=format_xaxis($hours)?>,
+				showYLabels: true,
+				yLabelColor: '#888',
+				showXLabels: true,
+				xLabelColor: '#888',
+				paddingLeft: 40,
+				paddingBottom: 20,
+				xLabelColor: '#888',
+				xLabelSpacing: <?=format_xskip($hours)?>,
+				labelFont: Fonts.Silkscreen,
+				typeLib: BitmapType,
+				dontForceZero: false,
+				enableHoverInfo: true,
+				showBarLabels: false
 			});
 			var data = [
 			<? foreach ($historical_data as $row): ?>

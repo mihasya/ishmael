@@ -1,6 +1,23 @@
 <?php
 	require_once('conf.php');
 
+function format_xaxis($hours){
+	if ($hours < 72){
+		return round(900/$hours * 1,0);
+	}
+	else{
+		return round(900/$hours * 24,0);
+	}
+}
+
+function format_xskip($hours){
+	if ($hours < 72){
+		return round(90/(900/$hours),0);
+	}
+	else{
+		return round(90/(900*24/$hours),0);
+	}
+}
 	function _format_query_callback($str) {
 		$fragment_class = "keyword";
 		if (preg_match("/^\s*\/\*.*?\*\/\s*$/", $str[0])) {

@@ -23,12 +23,37 @@
 			</tr>
 			<? endforeach; ?>
 		</table>
-		<h3>Previous Reports</h3>
+		<p>
 		<div class="graph_container">
+			<table>
+			<tr><th>Queries</th></tr><tr><td>
 			<canvas id="stats"></canvas>
+			</td></tr><tr><th>Time</th></tr><tr><td>
+			<canvas id="time"></canvas>
+			</td></tr></table>
 		</div>
+		</p>
 		 <script type="text/javascript">
 			var graph = new YAHOO.Smb.Graph('stats', {
+				start: 0,
+				width: 700,
+				height: 200,
+				end: <?= count($rows)?>,
+				type: 'bar',
+				hideYAxis: true,
+				hideXAxis: true,
+				enableHoverInfo: true,
+			});
+			var data = [
+			<? foreach ($rows as $row): ?>
+				{ date: '<?= $row['ts_max']?>', count: <?=$row['ts_cnt']?> },
+			<? endforeach; ?>
+			];
+			graph.addDataSet(data, { y: 'count', xLabel: 'date', yLabel: 'count', color: '#0063cd' });
+			graph.render();
+		</script>
+		 <script type="text/javascript">
+			var graph = new YAHOO.Smb.Graph('time', {
 				start: 0,
 				width: 700,
 				height: 200,
@@ -40,22 +65,25 @@
 			});
 			var data = [
 			<? foreach ($rows as $row): ?>
-				{ date: '<?= $row['ts_max']?>', query_time: <?=$row['Query_time_sum']?> },
+				{ date: '<?= $row['ts_max']?>', time: <?=$row['Query_time_sum']/$row['ts_cnt']?> },
 			<? endforeach; ?>
 			];
-			graph.addDataSet(data, { y: 'query_time', xLabel: 'date', yLabel: 'query_time', color: '#444444' });
+			graph.addDataSet(data, { y: 'time', xLabel: 'date', yLabel: 'time', color: '#ff0084' });
 			graph.render();
 		</script>
+		<h3>Previous Reports</h3>
 		<table>
 			<tr>
 				<th>Timestamp</th>
-				<th>Total Query time</th>
+				<th>Count</th>
+				<th>Avg time (ms)</th>
 				<th>Query</th>
 			</tr>
-			<? foreach ($rows as $row): ?>
+			<? foreach (array_reverse($rows) as $row): ?>
 			<tr <? if ($counter++ % 2): ?>class="alt"<? endif ?>>
 				<td><?= $row['ts_max']?></td>
-				<td><?= $row['Query_time_sum']?></td>
+				<td><?= $row['ts_cnt']?></td>
+				<td><?= round($row['Query_time_sum']/$row['ts_cnt']*1000,2)?></td>
 				<td><?= format_query($row['sample']) ?></td>
 			</tr>
 			<? endforeach?>
