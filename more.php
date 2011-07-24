@@ -25,7 +25,7 @@
 		WHERE
 			checksum={$checksum} AND
 			ts_max > date_sub(now(),interval $hours hour) 
-		ORDER BY ts_max DESC";
+		ORDER BY ts_max ASC";
 	$result=mysql_query($q);
 
 	$rows = array();

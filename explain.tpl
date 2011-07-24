@@ -13,7 +13,10 @@
 			<? foreach ($rows as $row): ?>
 			<tr <? if ($counter++ % 2): ?>class="alt"<? endif ?>>
 				<? foreach ($row as $key => $value): ?>
+				  <? if ($key == "table"): ?><td><a href="table.php?hours=<?= $hours ?>&table=<?= $value ?>&host=<?= $host ?>"><?= $value ?></a></td>
+                                 <? else: ?>
 				<td><?= $value ?></td>
+                                <? endif ?>
 				<? endforeach; ?>
 			</tr>
 			<? endforeach; ?>
