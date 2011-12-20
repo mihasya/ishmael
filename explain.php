@@ -13,7 +13,7 @@
 	$row = mysql_fetch_assoc($result);
 	$query = $row['sample'];
 	$explain = "EXPLAIN ".preg_replace('|^\s*\/\*.*\*\/|', '', $query);
-	
+
 	mysql_select_db($host_conf['db_database_live']) or die("Unable to select database");
 
 	$is_select_query = (stripos($explain, 'SELECT') !== false);

@@ -1,7 +1,7 @@
-                                                                     
-                                                                     
-                                                                     
-                                             
+
+
+
+
 /*
 Copyright (c) 2007, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
@@ -29,14 +29,14 @@ var Fonts={Silkscreen:{a:[[0,0,0,0],[0,1,1,0],[1,0,0,1],[1,1,1,1],[1,0,0,1],[1,0
 
 var TF = window.TF || {};
 
-TF.Graph = function(elementId, attr, seriesInfo, dataSource) {	
+TF.Graph = function(elementId, attr, seriesInfo, dataSource) {
 	// Call the superclass' constructor.
-	TF.Graph.superclass.constructor.call(this, elementId, attr, seriesInfo, dataSource); 
+	TF.Graph.superclass.constructor.call(this, elementId, attr, seriesInfo, dataSource);
 };
 YAHOO.lang.extend(TF.Graph, YAHOO.Smb.Graph);
 
 TF.Graph.prototype.drawBar = function(dataSet, color) {
-	
+
 	// Draw the colored background.
 
 	var barWidth = this.scale.horiz;
@@ -44,10 +44,10 @@ TF.Graph.prototype.drawBar = function(dataSet, color) {
 
 	for(var n = this.start, len = dataSet.length; n < this.end && n < len; n++) {
 		var barHeight = this.height - ((dataSet[n].y.value - this.min) * this.scale.vert) - this.paddingBottom;
-		this.ctx.fillStyle = dataSet[n].color; 
+		this.ctx.fillStyle = dataSet[n].color;
 		this.ctx.fillRect(dataSet[n].x.value * horizConstant + this.paddingLeft, barHeight, barWidth, dataSet[n].y.value * this.scale.vert);
-	}		
-	
+	}
+
 	return this;
 };
 
@@ -77,16 +77,16 @@ TF.Graph.prototype.drawLabels = function() {
 
 				if(y < 0) continue;
 				this.typeLib.addStringToCanvas(label, this.ctx, { x: x, y: y, font: this.labelFont, color: this.barLabelColor, scale: this.labelFontScale, angle: 270 });
-			}        
+			}
 		}
-	}             
+	}
 
 	return this;
 };
 
 TF.Graph.prototype.addDataSet = function(data, layout) {
 	var xLabel = layout.xLabel || layout.x;
-	var yLabel = layout.yLabel || layout.y;   
+	var yLabel = layout.yLabel || layout.y;
 	var color = layout.color || '#cc0000';
 
 	if(this.type === 'pie') {
@@ -124,9 +124,9 @@ TF.Graph.prototype.addDataSet = function(data, layout) {
 
 TF.Graph.prototype.updateHoverInfo = function(e) {
 	if(isNaN(this.canvasPosition.x) || isNaN(this.canvasPosition.y)) {
-		this.canvasPosition = { 
-			x: YAHOO.util.Dom.getX(this.canvas) - this.parentPosition.x, 
-			y: YAHOO.util.Dom.getY(this.canvas) - this.parentPosition.y 
+		this.canvasPosition = {
+			x: YAHOO.util.Dom.getX(this.canvas) - this.parentPosition.x,
+			y: YAHOO.util.Dom.getY(this.canvas) - this.parentPosition.y
 		};
 	}
 	var x = Math.round((e.clientX - this.canvasPosition.x - this.parentPosition.x - this.paddingLeft) / this.scale.horiz) + this.start;
@@ -136,7 +136,7 @@ TF.Graph.prototype.updateHoverInfo = function(e) {
 	}
 
 	// Fire the custom event.
-	
+
 	var inGraph = false;
 	var args = [];
 	if(x >= this.start)  {

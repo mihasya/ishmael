@@ -66,7 +66,7 @@ function format_xskip($hours){
 		return $host_config;
 	}
 
-	# build up a query string using 1. things we need in every URL and 
+	# build up a query string using 1. things we need in every URL and
 	# 2. whatever is passed in $args as k-v pairs
 	function ish_build_query($args) {
 		global $host;
