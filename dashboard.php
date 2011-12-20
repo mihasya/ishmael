@@ -32,10 +32,10 @@
 
 	# Get total amount of query time (for % later)
 	$q = "SELECT
-			SUM(query_time_sum) 
-		FROM 
+			SUM(query_time_sum)
+		FROM
 			{$host_conf['db_query_review_history_table']}
-		WHERE 
+		WHERE
 			ts_max > date_sub(now(),interval {$hours} hour);";
 	$result = mysql_query($q);
 	$query_time_sum = mysql_result($result, 0);
@@ -45,10 +45,10 @@
 
 	# Get total # of queries in history window (for % later)
 	$q = "SELECT
-			SUM(ts_cnt) 
-		FROM 
+			SUM(ts_cnt)
+		FROM
 			{$host_conf['db_query_review_history_table']}
-		WHERE 
+		WHERE
 			ts_max > date_sub(now(),interval $hours hour);";
 	$result = mysql_query($q);
 	$query_qty_sum = mysql_result($result, 0);
@@ -67,10 +67,10 @@
 			(SUM(ts_cnt)/{$query_qty_sum}*100) AS qty_pct,
 			(SUM(query_time_sum)/{$query_time_sum}*100) AS time_pct,
 			((SUM(query_time_sum)/{$query_time_sum}*100)/(SUM(ts_cnt)/{$query_qty_sum}*100)) AS ratio
-		FROM 
+		FROM
 			{$host_conf['db_query_review_history_table']}
-		WHERE 
-			ts_max > date_sub(now(),interval $hours hour) 
+		WHERE
+			ts_max > date_sub(now(),interval $hours hour)
 		GROUP BY checksum ORDER BY $sort DESC LIMIT 20";
 
 	$result = mysql_query($q);

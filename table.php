@@ -14,12 +14,12 @@
                          {$host_conf['db_query_review_table']} as t
                  join
                          {$host_conf['db_query_review_history_table']} as h
-                  on 
-                        t.checksum=h.checksum 
-                where 
+                  on
+                        t.checksum=h.checksum
+                where
                         t.sample like '% {$table} %'
 		AND
-			h.ts_max > date_sub(now(),interval {$hours} hour) 
+			h.ts_max > date_sub(now(),interval {$hours} hour)
                  group by t.checksum order by count desc";
 
         $result=mysql_query($q);

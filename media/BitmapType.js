@@ -1,7 +1,7 @@
 var BitmapType = function() {
-	
+
 	return {
-	    
+
 		// Insert a canvas element in place of text.
 
 		convert: function(el, attr) {
@@ -25,31 +25,31 @@ var BitmapType = function() {
 			for(var index = 0, position = 0, rows = 1, tLen = tokens.length; index < tLen; index++) {
 				var token = tokens[index],
 				    glyph = font[token];
-			
+
 				for(var n = index, len = tokens.length; n < len; n++) {
 					if(tokens[n] === 'space') break;
 				}
 				var nextSpace = n;
 			        var wordWidth = BitmapType.calculateLength(tokens.slice(index, nextSpace), font, scale).totalWidth;
 			        var letterWidth = BitmapType.calculateLength(tokens.slice(index, index + 1), font, scale).totalWidth;
-			
+
 				if((position + wordWidth > width) && ((tokens[index - 1] === 'space' && wordWidth <= width) || (position + letterWidth > width))) {
 					rows++;
 					position = 0;
 				}
-				position += (glyph[0].length + 1) * scale;							
+				position += (glyph[0].length + 1) * scale;
 			}
 			height = length.lineHeight * rows;
 
 			var angle = attr.angle || 0;
 			var canvasWidth = (angle === 90 || angle === 270) ? height : width;
 			var canvasHeight = (angle === 90 || angle === 270) ? width : height;
-			
+
 			if(YAHOO.env.ua.webkit >= 412 && YAHOO.env.ua.webkit < 522) { // Safari 2
 				canvas.style.width = canvasWidth + 'px';
 				canvas.style.height = canvasHeight + 'px';
 			}
-			else {				
+			else {
 				canvas.width = canvasWidth;
 				canvas.height = canvasHeight;
 			}
@@ -59,9 +59,9 @@ var BitmapType = function() {
 				canvas = YAHOO.util.Dom.get(el.id + '-bitmap-type-canvas'); // Get a new reference to the canvas.
 			}
 			var ctx = canvas.getContext('2d');
-			
+
 			// Get the current color of the text.
-			
+
 			var color = '#000'; // Default color.
 			if(el.currentStyle) { // IE
 				color = el.currentStyle['color'];
@@ -79,9 +79,9 @@ var BitmapType = function() {
 				row = position[1];
 			}
 		},
-		
+
 		// Draw text on a canvas element.
-		
+
 		addStringToCanvas: function(text, ctx, attr) {
 			var x = attr.x || 0;
 			var y = attr.y || 0;
@@ -91,7 +91,7 @@ var BitmapType = function() {
 			var angle = attr.angle || 0;
 			var color = attr.color || '#000';
 			var textAlign = attr.textAlign || 'left';
-			
+
 			var tokens = BitmapType.tokenize(text);
 
 			var length = BitmapType.calculateLength(tokens, font, scale, lineSpacing);
@@ -101,19 +101,19 @@ var BitmapType = function() {
 			for(var index = 0, position = 0, rows = 1, tLen = tokens.length; index < tLen; index++) {
 				var token = tokens[index],
 				    glyph = font[token];
-			
+
 				for(var n = index, len = tokens.length; n < len; n++) {
 					if(tokens[n] === 'space') break;
 				}
 				var nextSpace = n;
 			        var wordWidth = BitmapType.calculateLength(tokens.slice(index, nextSpace), font, scale).totalWidth;
 			        var letterWidth = BitmapType.calculateLength(tokens.slice(index, index + 1), font, scale).totalWidth;
-			
+
 				if((position + wordWidth > width) && ((tokens[index - 1] === 'space' && wordWidth <= width) || (position + letterWidth > width))) {
 					rows++;
 					position = 0;
 				}
-				position += (glyph[0].length + 1) * scale;							
+				position += (glyph[0].length + 1) * scale;
 			}
 			height = length.lineHeight * rows;
 			ctx.fillStyle = color;
@@ -128,9 +128,9 @@ var BitmapType = function() {
 				row = position[1];
 			}
 		},
-		
+
 		// Helper methods.
-		
+
 		tokenize: function(text) {
 			if(text === null || text === undefined) text = '';
 			text = text.toString().replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
@@ -165,13 +165,13 @@ var BitmapType = function() {
 					case ',':  token = 'comma';             break;          case '.':  token = 'period';            break;
 					case '/':  token = 'rightSlash';        break;          case '<':  token = 'leftAngleBracket';  break;
 					case '>':  token = 'rightAngleBracket'; break;          case '?':  token = 'questionMark';      break;
-					default:   token = ''; 
+					default:   token = '';
 				}
 				if(token !== '') tokens.push(token);
-			}						
+			}
 			return tokens;
 		},
-		
+
 		calculateLength: function(tokens, font, scale, lineSpacing) {
 			var length = { totalWidth: 0 };
 			for(var n = 0, len = tokens.length; n < len; n++) {
@@ -181,21 +181,21 @@ var BitmapType = function() {
 			length.lineHeight = (font['space'].length + lineSpacing) * scale;
 			return length;
 		},
-		
+
 		translate: function(tokens, index, position, row, width, height, ctx, font, angle, scale, length, x, y) {
                         if(x === undefined) x = 0;
-                        if(y === undefined) y = 0;        
+                        if(y === undefined) y = 0;
 
 			var token = tokens[index],
 			    glyph = font[token];
-			
+
 			for(var n = index, len = tokens.length; n < len; n++) {
 				if(tokens[n] === 'space') break;
 			}
 			var nextSpace = n;
 			var wordWidth = BitmapType.calculateLength(tokens.slice(index, nextSpace), font, scale).totalWidth;
 			var letterWidth = BitmapType.calculateLength(tokens.slice(index, index + 1), font, scale).totalWidth;
-			
+
 			if((position + wordWidth > width) && ((tokens[index - 1] === 'space' && wordWidth <= width) || (position + letterWidth > width))) {
                                 row++;
 			    position = 0;
@@ -206,7 +206,7 @@ var BitmapType = function() {
 					switch(angle) {
 						case 90:  ctx.fillRect(len - n + x, m + position + y, scale, scale);                    break;
 						case 180: ctx.fillRect(length - (m + position) - 1 + x, len - n + y, scale, scale);     break;
-						case 270: ctx.fillRect(n + x, length - (m + position) - 1 + y, scale, scale);           break;		
+						case 270: ctx.fillRect(n + x, length - (m + position) - 1 + y, scale, scale);           break;
 						default:  ctx.fillRect(m + position + x, n + (row * height) + y, scale, scale);         break;
 					}
 				}
