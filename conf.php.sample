@@ -20,6 +20,7 @@
 			# 'db_user' => 'foo',
 			# 'db_password' => 'blah',
 			# values available only at the host level:
+			# 'port' => '3308', # optional if using a non-default port
 			# 'label' => 'shard1a' # used for easier host identification
 		)
 	);

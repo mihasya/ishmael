@@ -63,6 +63,9 @@ function format_xskip($hours){
 		$host_config['title'] = $host_config['label']
 			? "{$host_config['label']} - {$host_config['db_host']}"
 			: $host_config['db_host'];
+		if (array_key_exists('port', $host_config)) {
+			$host_config['db_host'] .= ':' . $host_config['port'];
+		}
 		return $host_config;
 	}
 
