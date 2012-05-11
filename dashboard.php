@@ -6,6 +6,7 @@
 	require_once('init.php');
 
 	$sort = ($_GET['sort']) ? $_GET['sort'] : "ratio";
+	$limit = ($conf['limit']) ? $conf['limit'] : 20;
 
 	$aggregate='%m/%d/%y %H:00:00';
 	if ($hours > 720){
@@ -71,7 +72,7 @@
 			{$host_conf['db_query_review_history_table']}
 		WHERE 
 			ts_max > date_sub(now(),interval $hours hour) 
-		GROUP BY checksum ORDER BY $sort DESC LIMIT 20";
+		GROUP BY checksum ORDER BY $sort DESC LIMIT $limit";
 
 	$result = mysql_query($q);
 	$err = mysql_error();

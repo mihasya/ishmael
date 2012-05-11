@@ -12,6 +12,7 @@
 	# mk-query-digest lets you customize table names
 	$conf['db_query_review_table'] = 'query_review';
 	$conf['db_query_review_history_table'] = 'query_review_history';
+	$conf['limit'] = 20; # max number of slow queries to display
 
 	# You can aggregate the review tables for many db instances in a single db.
 	# In that case, ishmael will auto-generate the list of hosts based on the
