@@ -13,6 +13,17 @@
 	$conf['db_query_review_table'] = 'query_review';
 	$conf['db_query_review_history_table'] = 'query_review_history';
 
+	# You can aggregate the review tables for many db instances in a single db.
+	# In that case, ishmael will auto-generate the list of hosts based on the
+	# contents of the aggregate db. $conf['hosts'] will not be used.
+	#
+	# If you have db{1..20}, use table names like db1_query_review. 
+	# define db_central_host and add a wildcard to the table definitions:
+	#
+	# $conf['db_central_host'] = ''; # only define if aggregating many hosts to one db
+	# $conf['db_query_review_table'] = '%query_review';
+	# $conf['db_query_review_history_table'] = '%query_review_history';
+
 	$conf['hosts'] = array(
 		'sample.host' => array(
 			# leave empty to use defaults if your cluster is homogeneous
