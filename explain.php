@@ -4,6 +4,12 @@
 	#
 
 	require_once('init.php');
+	$explain = (isset($conf['explain'])) ? $conf['explain'] : true;
+	if (!$explain) {
+		header("HTTP/1.0 404 Not Found");
+		header("Status: 404 Not Found");
+		return;
+	}
 
 	$checksum = $_GET['checksum'];
 	$hours = $_GET['hours'];

@@ -7,6 +7,7 @@
 
 	$sort = ($_GET['sort']) ? $_GET['sort'] : "ratio";
 	$limit = ($conf['limit']) ? $conf['limit'] : 20;
+	$explain = (isset($conf['explain'])) ? $conf['explain'] : true;
 
 	$aggregate='%m/%d/%y %H:00:00';
 	if ($hours > 720){
