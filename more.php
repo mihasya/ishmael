@@ -5,7 +5,7 @@
 
 	require_once('init.php');
 
-	$checksum = $_GET['checksum'];
+	$checksum = mysql_real_escape_string($_GET['checksum']);
 
 	$fields = array(
 		'Query_time',

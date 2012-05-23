@@ -122,11 +122,11 @@ function format_xskip($hours){
 	$hosts = ish_get_host_list();
 
 	# which host are we looking at
-	$host = $_GET['host'] ? $_GET['host'] : reset(array_keys($hosts));
+	$host = $_GET['host'] ? mysql_real_escape_string($_GET['host']) : reset(array_keys($hosts));
 	$host_conf = ish_get_host_config($host);
 
 	# what timeframe we want to look at
-	$hours = $_GET['hours'] ? $_GET['hours'] : 24;
+	$hours = $_GET['hours'] ? mysql_real_escape_string($_GET['hours']) : 24;
 
 	mysql_connect($host_conf['db_host'],$host_conf['db_user'],$host_conf['db_password']) or die(sprintf("Unable to connect to MySQL server: %s", mysql_error()));
 	mysql_select_db($host_conf['db_database_mk']) or die(sprintf("Unable to select database: %s", mysql_error()));

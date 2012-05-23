@@ -5,8 +5,8 @@
 
         require_once('init.php');
 
-        $table = $_GET['table'];
-	$hours = $_GET['hours'];
+        $table = mysql_real_escape_string($_GET['table']);
+	$hours = mysql_real_escape_string($_GET['hours']);
 
         $q = "SELECT
                         t.sample as query, sum(h.ts_cnt) as count, t.checksum as checksum

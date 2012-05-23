@@ -12,8 +12,8 @@
 		return;
 	}
 
-	$checksum = $_GET['checksum'];
-	$hours = $_GET['hours'];
+	$checksum = mysql_real_escape_string($_GET['checksum']);
+	$hours = mysql_real_escape_string($_GET['hours']);
 
 	$q = "SELECT * FROM {$host_conf['db_query_review_history_table']} WHERE checksum = '{$checksum}'";
 	$result = mysql_query($q);

@@ -5,7 +5,7 @@
 
 	require_once('init.php');
 
-	$sort = ($_GET['sort']) ? $_GET['sort'] : "ratio";
+	$sort = ($_GET['sort']) ? mysql_real_escape_string($_GET['sort']) : "ratio";
 	$limit = ($conf['limit']) ? $conf['limit'] : 20;
 	$explain = (isset($conf['explain'])) ? $conf['explain'] : true;
 
