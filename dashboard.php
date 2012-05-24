@@ -5,7 +5,9 @@
 
 	require_once('init.php');
 
-	$sort = ($_GET['sort']) ? $_GET['sort'] : "ratio";
+	$sort = ($_GET['sort']) ? mysql_real_escape_string($_GET['sort']) : "ratio";
+	$limit = ($conf['limit']) ? $conf['limit'] : 20;
+	$explain = (isset($conf['explain'])) ? $conf['explain'] : true;
 
 	$aggregate='%m/%d/%y %H:00:00';
 	if ($hours > 720){
@@ -59,25 +61,36 @@
 
 	# Get list of bad queries
 	$q = "SELECT
-			checksum,
-			sample,
-			SUM(ts_cnt) AS count,
-			SUM(query_time_sum) AS time,
-			ts_max AS time_max,
-			(SUM(ts_cnt)/{$query_qty_sum}*100) AS qty_pct,
-			(SUM(query_time_sum)/{$query_time_sum}*100) AS time_pct,
-			((SUM(query_time_sum)/{$query_time_sum}*100)/(SUM(ts_cnt)/{$query_qty_sum}*100)) AS ratio
+			h.checksum,
+			r.fingerprint,
+			h.sample,
+			SUM(h.ts_cnt) AS count,
+			SUM(h.query_time_sum) AS time,
+			h.ts_max AS time_max,
+			(SUM(h.ts_cnt)/{$query_qty_sum}*100) AS qty_pct,
+			(SUM(h.query_time_sum)/{$query_time_sum}*100) AS time_pct,
+			((SUM(h.query_time_sum)/{$query_time_sum}*100)/(SUM(h.ts_cnt)/{$query_qty_sum}*100)) AS ratio
 		FROM 
-			{$host_conf['db_query_review_history_table']}
-		WHERE 
-			ts_max > date_sub(now(),interval $hours hour) 
-		GROUP BY checksum ORDER BY $sort DESC LIMIT 20";
+			{$host_conf['db_query_review_history_table']} h
+		INNER JOIN
+			{$host_conf['db_query_review_table']} r
+		USING(checksum) WHERE 
+			h.ts_max > date_sub(now(),interval $hours hour) 
+		GROUP BY h.checksum ORDER BY $sort DESC LIMIT $limit";
 
 	$result = mysql_query($q);
 	$err = mysql_error();
 	print_r($err);
 	$rows = array();
 	while ($row = mysql_fetch_assoc($result)) {
+		if ($conf['anon']) {
+			if (preg_match('@/\* (\S+)(::\S+)?.*\*/@', $row['sample'], $matches)) {
+				$c = ($matches[2]) ? $matches[1] . $matches[2] : $matches[1];
+				$row['sample'] = '/* ' . $c . ' */ ' . $row['fingerprint'];
+			} else {
+				$row['sample'] = $row['fingerprint'];
+			}
+		}
 		$row['explain_url'] = "explain.php?" . ish_build_query(array('checksum'=>$row['checksum']));
 		$row['more_url'] = "more.php?" . ish_build_query(array('checksum'=>$row['checksum']));
 		$rows[] = $row;

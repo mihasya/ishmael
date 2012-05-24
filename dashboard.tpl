@@ -58,7 +58,9 @@
 				<td><? printf("%.2f", $row['qty_pct']) ?> <br /> <small>(<?= $row['count'] ?>)</small></td>
 				<td><? printf("%.2f", $row['ratio']) ?></td>
 				<td><?=format_query($row['sample']) ?></td>
+				<? if ($explain): ?>
 				<td><a href="<?= $row['explain_url'] ?>">explain</a></td>
+				<? endif ?>
 				<td><a href="<?= $row['more_url'] ?>">more</a></td>
 			</tr>
 		<? endforeach ?>
