@@ -84,18 +84,9 @@
 	$rows = array();
 	while ($row = mysql_fetch_assoc($result)) {
 		if ($conf['anon']) {
-			if (preg_match('@/\*.*\*/@', $row['sample'], $matches)) {
-				if (preg_match('@ 127.0.0.1 \*/@', $matches[0])) {
-					$extra = $matches[0];
-				} elseif (preg_match('@ \d+\.\d+\.\d+\.\d+ @', $matches[0])) {
-					$extra = preg_replace('@\d+\.\d+\.\d+\.\d+@', 'External_IP', $matches[0]);
-				} elseif (preg_match('@ \S+ \*/@', $matches[0])) {
-					$extra = preg_replace('@ \S+ \*/@', ' User */', $matches[0]);
-				}		
-				else {
-					$extra = $matches[0];
-				}
-				$row['sample'] = $extra . ' ' . $row['fingerprint'];
+			if (preg_match('@/\* (\S+)(::\S+)?.*\*/@', $row['sample'], $matches)) {
+				$c = ($matches[2]) ? $matches[1] . $matches[2] : $matches[1];
+				$row['sample'] = '/* ' . $c . ' */ ' . $row['fingerprint'];
 			} else {
 				$row['sample'] = $row['fingerprint'];
 			}
