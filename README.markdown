@@ -17,4 +17,5 @@ Simply create a `conf.php` file using the sample as a guide and copy the files i
 ## Authors
 * Mikhail Panchenko
 * Tim Denike
+* Asher Feldman
 * JS graph code by Ross Harmes
