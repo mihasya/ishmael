@@ -6,19 +6,19 @@
 		<table>
 			<tr>
 				<th>&nbsp;</th>
-				<? foreach($points as $point): ?>
+				<? foreach(array_keys($points) as $point): ?>
 				<th><?= $point ?></th>
 				<? endforeach; ?>
 			</tr>
 			<? $data_counter = 1; ?>
 			<tr>
-				<th class="horiz">Query count</th><td><?= $rows[0]['ts_cnt']?></td>
+				<th class="horiz">Query count</th><td><?= $qcount?></td>
 			</tr>
 			<? foreach($fields as $field): ?>
 			<tr <? if ($data_counter++ % 2): ?>class="alt"<? endif ?>>
 				<th class="horiz"><?= $field ?></th>
-				<? foreach($points as $point): $col = "{$field}_{$point}"; ?>
-				<td><?= $rows[0][$col]?></td>
+				<? foreach(array_keys($points) as $point): $col = "{$field}_{$point}"; ?>
+				<td><?= $histo[$field][$point]?></td>
 				<? endforeach; ?>
 			</tr>
 			<? endforeach; ?>
@@ -28,7 +28,7 @@
 			<table>
 			<tr><th>Queries</th></tr><tr><td>
 			<canvas id="stats"></canvas>
-			</td></tr><tr><th>Time</th></tr><tr><td>
+			</td></tr><tr><th>Time (avg, pct_95)</th></tr><tr><td>
 			<canvas id="time"></canvas>
 			</td></tr></table>
 		</div>
@@ -55,20 +55,31 @@
 		 <script type="text/javascript">
 			var graph = new YAHOO.Smb.Graph('time', {
 				start: 0,
-				width: 700,
-				height: 200,
+				width: 740,
+				height: 220,
 				end: <?= count($rows)?>,
-				type: 'bar',
-				hideYAxis: true,
-				hideXAxis: true,
-				enableHoverInfo: true
+				type: 'line',
+				enableHoverInfo: true,
+                                showYLabels: true,
+                                yLabelColor: '#888',
+                                xLabelColor: '#888',
+                                paddingLeft: 20,
+                                xLabelColor: '#888',
+                                labelFont: Fonts.Silkscreen,
+                                typeLib: BitmapType,
 			});
 			var data = [
 			<? foreach ($rows as $row): ?>
-				{ date: '<?= $row['ts_max']?>', time: <?=$row['Query_time_sum']/$row['ts_cnt']?> },
+				{ date: '<?= $row['ts_max']?>', pct_95: <?=$row['Query_time_pct_95']?> },
 			<? endforeach; ?>
 			];
-			graph.addDataSet(data, { y: 'time', xLabel: 'date', yLabel: 'time', color: '#ff0084' });
+			var data2 = [
+			<? foreach ($rows as $row): ?>
+				{ date: '<?= $row['ts_max']?>', tavg: <?=$row['Query_time_sum']/$row['ts_cnt']?> },
+			<? endforeach; ?>
+			];
+			graph.addDataSet(data, { y: 'pct_95', xLabel: 'date', yLabel: 'pct_95', color: '#ff0084' });
+			graph.addDataSet(data2, { y: 'tavg', xLabel: 'date', yLabel: 'tavg', color: '#aa50d4' });
 			graph.render();
 		</script>
 		<h3>Previous Reports</h3>
