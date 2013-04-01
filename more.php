@@ -82,31 +82,24 @@
 		$stddev = sqrt($histo[$field]["stddev"] / $rcount);
 		$histo[$field]["stddev"] = $stddev;
 
-		/* Find the weighted median of 95th percentiles across all samples in period */
-		asort ($histo[$field]["pct_95"], SORT_NUMERIC);
-		$offset = round(array_sum(array_keys($histo[$field]["pct_95"])) * 0.5);
-		$i = 0;
-		foreach ($histo[$field]["pct_95"] as $cnt => $v) {
-			$i += $cnt;
-			if ($i >= $offset) {
-				$p95 = $v;
-				break;
+		# Find the weighted median of 95th percentiles across all samples in period */
+		# For pct_95 and median, we've bult an array containing count_per_sample => time.
+		# We sort this by value [ 42 => '.00123', 542 => '.0123', 314 => '.123', 7 => '1.230' ]
+		# The middle of the sum of sorted keys is the overall median
+		foreach (array('pct_95', 'median') as $f) {
+			$i = 0;
+			$median = 0;
+			asort ($histo[$field][$f], SORT_NUMERIC);
+			$offset = round(array_sum(array_keys($histo[$field][$f])) * 0.5);
+			foreach ($histo[$field][$f] as $cnt => $v) {
+				$i += $cnt;
+				if ($i >= $offset) {
+					$median = $v;
+					break;
+				}
 			}
+			$histo[$field][$f] = $median;
 		}
-		$histo[$field]["pct_95"] = $p95;
-
-		/* Find the weighted median of median times across all samples in period */
-		asort ($histo[$field]["median"], SORT_NUMERIC);
-		$offset = round(array_sum(array_keys($histo[$field]["median"])) * 0.5);
-		$i = 0;
-		foreach ($histo[$field]["median"] as $cnt => $v) {
-			$i += $cnt;
-			if ($i >= $offset) {
-				$median = $v;
-				break;
-			}
-		}
-		$histo[$field]["median"] = $median; 
 	}
 
 	require("more.tpl");
